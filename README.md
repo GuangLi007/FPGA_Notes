@@ -1,0 +1,26 @@
+# FPGA_Notes
+
+ACX720 (XC7A35T) FPGA 学习笔记合集，使用 Obsidian 管理。
+
+## 笔记列表
+
+| # | 笔记 | 对应项目 |
+|---|------|---------|
+| 1 | FPGA 设计思路与模块划分指南 | — |
+| 2 | FPGA 引脚输入输出方向判断经验总结 | — |
+| 3 | Verilog wire 与 reg 的区别及模块连接 | — |
+| 4 | 线性序列机原理与应用 | — |
+| 5 | 计数器控制LED多阶段时序 | Acx720_Led |
+| 6 | 拨码开关控制LED多段时序 | Line_Quse_3 |
+| 7 | 状态机控制动态/静态LED切换 | Line_Quse_4 |
+| 8 | 多计数器使能控制的LED时序 | Line_Quse_4 (方案B) |
+| 9 | 呼吸灯PWM设计 | Breath_Led |
+| — | D触发器与Verilog实现 | — |
+| — | UART串口发送模块设计与验证 | USART_TX |
+| — | UART串口接收模块设计与验证 | USART_RX |
+| — | UART回环LoopBack设计与验证 | USART_Loopback |
+| — | VIVADO VIO IP核使用 | VIO_Test |
+
+## 对应工程
+
+工程源码见 [FPGA_Projects](https://github.com/GuangLi007/FPGA_Projects) 仓库。
