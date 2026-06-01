@@ -22,6 +22,10 @@ ACX720 (XC7A35T) FPGA 学习笔记合集，使用 Obsidian 管理。
 | — | UART串口接收模块设计与验证 | USART_RX |
 | — | UART回环LoopBack设计与验证 | USART_Loopback |
 | — | VIVADO VIO IP核使用 | VIO_Test / VIO_Test2 |
+| 12 | HC595详解_串并转换与Verilog实现 | Segment_Display |
+| 13 | 查找表在FPGA中的应用与设计技巧 | — |
+| 14 | SPI通信与ADC128S102驱动设计 | ADC |
+| 15 | FPGA ROM 详解 | ROM_Test |
 
 ## 对应工程
 
