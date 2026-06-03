@@ -26,6 +26,8 @@ ACX720 (XC7A35T) FPGA 学习笔记合集，使用 Obsidian 管理。
 | 13 | 查找表在FPGA中的应用与设计技巧 | — |
 | 14 | SPI通信与ADC128S102驱动设计 | ADC |
 | 15 | FPGA ROM 详解 | ROM_Test |
+| 16 | FPGA FIFO 详解 | — |
+| 17 | DDS 直接数字频率合成详解 | — |
 
 ## 对应工程
 
