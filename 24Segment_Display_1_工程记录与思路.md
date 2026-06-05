@@ -85,8 +85,8 @@ module HEX8_GPIO (clk, reset_n, sw, seg, sel);
 - 参考工程：`/home/kl/My_Project/FPGA/Segment_Display/`
 - 小梅哥例程：`ch12_acx720_hex8_hc595.rar`
 - 管脚分配表：`ACX720_FPGA管脚分配表20201221.xlsx`
-- 已有笔记：[[11数码管74HC595动态扫描显示]]
+- 已有笔记：[[12数码管74HC595动态扫描显示]]
 
 ## 相关笔记
 
-- [[12HC595详解_串并转换与Verilog实现]]
+- [[13HC595详解_串并转换与Verilog实现]]

@@ -221,7 +221,7 @@ initial $readmemh("sine_wave.mem", wave);
 
 ## 与 74HC595 笔记的关联
 
-- 段码查找表是 [[11数码管74HC595动态扫描显示]] 中 Seg_Control 模块的核心
+- 段码查找表是 [[12数码管74HC595动态扫描显示]] 中 Seg_Control 模块的核心
 - 级联 HC595 的 16 bit 数据拼装 `{1'b0, seg, sel}` 也是查表的输出拼接
 - 也可用查找表代替移位寄存器实现串并转换（用计数器查表输出每位）
 
@@ -229,4 +229,4 @@ initial $readmemh("sine_wave.mem", wave);
 
 - Vivado 综合手册 UG901: 关于 RAM/ROM 推断
 - 小梅哥 ch12 例程：段码查找表 + HC595 驱动
-- [[12HC595详解_串并转换与Verilog实现]]
+- [[13HC595详解_串并转换与Verilog实现]]

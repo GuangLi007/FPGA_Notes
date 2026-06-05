@@ -248,7 +248,7 @@ endmodule
 
 ### 数码管段码译码
 
-已在 [[13查找表在FPGA中的应用与设计技巧]] 中详细讲解，本质就是小 ROM：
+已在 [[19查找表在FPGA中的应用与设计技巧]] 中详细讲解，本质就是小 ROM：
 
 ```verilog
 always @(*) begin
@@ -326,8 +326,8 @@ Block Memory Generator → `True Dual Port ROM`，或 HDL 声明双端口数组�
 
 | 笔记 | 关联点 |
 |------|--------|
-| [[13查找表在FPGA中的应用与设计技巧]] | ROM 是查找表的物理实现，段码表即小 ROM |
-| [[12HC595详解_串并转换与Verilog实现]] | 串并转换的控制表可用 ROM 实现 |
+| [[19查找表在FPGA中的应用与设计技巧]] | ROM 是查找表的物理实现，段码表即小 ROM |
+| [[13HC595详解_串并转换与Verilog实现]] | 串并转换的控制表可用 ROM 实现 |
 | 小梅哥 ch13：`ch13_acx720_rom_ip.rar` | ROM IP 完整工程例程 |
 | 小梅哥 ch26/27 | ROM 在 TFT/HDMI 显示中的应用（字库/图像） |
 
@@ -337,5 +337,5 @@ Block Memory Generator → `True Dual Port ROM`，或 HDL 声明双端口数组�
 
 - UG901 (Vivado Synthesis Guide): RAM/ROM 推断章节
 - 小梅哥 ACX720 例程：ch13 ROM IP / ch26 ROM 图像 / ch27 ROM 字符
-- [[13查找表在FPGA中的应用与设计技巧]]
-- [[15FPGA ROM 详解]]
+- [[19查找表在FPGA中的应用与设计技巧]]
+- [[20FPGA ROM 详解]]
