@@ -397,38 +397,58 @@ with open("image.coe", "w") as f:
 
 ---
 
-## 七、ACX720 开发板 VGA 电路
+## 七、ACX720 开发板 VGA 方案（ACM7123 模块）
 
-ACX720 的 VGA 接口电路特点：
+ACX720 **板载无 VGA 接口**，VGA 需通过 **ACM7123 VGA 模块**（GM7123 DAC 芯片）插在 **GPIO2** 上实现。
 
-| 项目 | 说明 |
-|------|------|
-| FPGA 引脚 | RGB 各 4bit（共 12 个 GPIO） |
-| 电阻网络 | 4bit 加权电阻分压（如 330Ω/470Ω/680Ω/1kΩ） |
-| HSync/VSync | 直接 GPIO 输出（3.3V → 经 330Ω 电阻） |
-| 连接器 | 标准 DE-15 母座 |
+### ACM7123 模块工作原理
 
-### XDC 约束示例
+```
+FPGA (GPIO2)
+  R[3:0] ──→┌────────┐  R 模拟 ─→ DE-15
+  G[3:0] ──→│GM7123  │  G 模拟 ─→ pin1/2/3
+  B[3:0] ──→│  DAC   │  B 模拟 ─→
+  HSync ───→│ (x3)   │  HSync ─→ pin13
+  VSync ───→│        │  VSync ─→ pin14
+             │        │  VGA_CLK ─→ 像素时钟
+             └────────┘
+```
+
+| 模块信号 | FPGA GPIO2 引脚 | 说明 |
+|---------|----------------|------|
+| vga_r[3:0] | GPIO2 特定引脚 | 红色 4bit 数字输入 |
+| vga_g[3:0] | GPIO2 特定引脚 | 绿色 4bit 数字输入 |
+| vga_b[3:0] | GPIO2 特定引脚 | 蓝色 4bit 数字输入 |
+| vga_hsync | GPIO2 特定引脚 | 行同步 |
+| vga_vsync | GPIO2 特定引脚 | 场同步 |
+| vga_clk | GPIO2 特定引脚 | 像素时钟（GM7123 采样时钟） |
+
+> 具体 GPIO2 引脚号以对应版本的管脚分配表为准，V2 版与 V3 版可能不同。
+
+### XDC 约束示例（GPIO2 方案）
 
 ```tcl
-set_property PACKAGE_PIN R4   [get_ports {vga_r[3]}]
-set_property PACKAGE_PIN T4   [get_ports {vga_r[2]}]
-set_property PACKAGE_PIN R5   [get_ports {vga_r[1]}]
-set_property PACKAGE_PIN T5   [get_ports {vga_r[0]}]
-set_property PACKAGE_PIN R6   [get_ports {vga_g[3]}]
-set_property PACKAGE_PIN T6   [get_ports {vga_g[2]}]
-set_property PACKAGE_PIN R7   [get_ports {vga_g[1]}]
-set_property PACKAGE_PIN T7   [get_ports {vga_g[0]}]
-set_property PACKAGE_PIN R8   [get_ports {vga_b[3]}]
-set_property PACKAGE_PIN T8   [get_ports {vga_b[2]}]
-set_property PACKAGE_PIN R9   [get_ports {vga_b[1]}]
-set_property PACKAGE_PIN T9   [get_ports {vga_b[0]}]
-
-set_property PACKAGE_PIN R10  [get_ports vga_hsync]
-set_property PACKAGE_PIN T10  [get_ports vga_vsync]
+# 以 GPIO2 为例，实际引脚号查管脚分配表
+set_property PACKAGE_PIN xxx [get_ports {vga_r[3]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_r[2]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_r[1]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_r[0]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_g[3]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_g[2]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_g[1]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_g[0]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_b[3]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_b[2]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_b[1]}]
+set_property PACKAGE_PIN xxx [get_ports {vga_b[0]}]
+set_property PACKAGE_PIN xxx [get_ports vga_hsync]
+set_property PACKAGE_PIN xxx [get_ports vga_vsync]
+set_property PACKAGE_PIN xxx [get_ports vga_clk]
 
 set_property IOSTANDARD LVCMOS33 [get_ports {vga_*}]
 ```
+
+> 详细引脚定义参考 `ACX720_35使用GPIO2接ACM7123 VGA模块管脚定义表.xlsx`
 
 ---
 
@@ -457,9 +477,9 @@ set_property IOSTANDARD LVCMOS33 [get_ports {vga_*}]
 更换像素时钟 PLL 配置，并更新对应的时序参数。PLL 输出频率 = 行总 × 场总 × 刷新率。
 
 ### Q: 12bit 颜色不够用怎么办？
-- 增加 RGB 位宽到 8bit（ACX720 需要改电阻网络）
+- 换用更高位宽的 VGA DAC 模块（如 8bit × 3）
 - 用 PWM 做颜色深度扩展（需要足够高频）
-- 换 HDMI 接口（数字信号，颜色深度高）
+- 换 HDMI 接口（数字信号，颜色深度高，ACX720 板载双 HDMI）
 
 ---
 
@@ -527,6 +547,7 @@ endmodule
 
 - [VGA Signal Timing (tinyvga.com)](http://tinyvga.com/vga-timing)
 - Xilinx UG901: 时钟资源与 PLL 配置
-- ACX720 原理图: VGA 接口电路
+- ACX720 原理图: GPIO2 接口定义
+- ACX720_35使用GPIO2接ACM7123 VGA模块管脚定义表.xlsx
 - 小梅哥 ch25: VGA 显示驱动例程
 - [[22DDS 直接数字频率合成详解]]
