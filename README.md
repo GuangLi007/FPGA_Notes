@@ -48,6 +48,13 @@ ACX720 (XC7A35T) FPGA 学习笔记合集，使用 Obsidian 管理。
 | 23 | VGA 显示驱动详解 | 显示时序驱动 |
 | 24 | Segment_Display_1_工程记录与思路 | 综合实践 |
 
+### ZYNQ / PS 篇
+
+| # | 笔记 | 说明 |
+|---|------|------|
+| 33 | Hello World 与 MIO Key 实验笔记 | Zynq PS MIO GPIO + UART Hello World |
+| 34 | EMIO Key 实验笔记 | Zynq PS EMIO GPIO 按键控制 LED |
+
 ## 对应工程
 
 工程源码见 [FPGA_Projects](https://github.com/GuangLi007/FPGA_Projects) 仓库。
